@@ -2,10 +2,12 @@
 import selenium
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+import ipdb
 
 class TecMundo:
     def __init__(self):
-        self.base_url = "https://www.tecmundo.com.br/novidades"
+        self.base_url = "https://www.tecmundo.com.br/dispositivos-moveis"
         self.name = "TecMundo"
         self.article_links = []
         self.articles = {
@@ -20,8 +22,14 @@ class TecMundo:
         #define the data we want and the structure to store it 
 
     def search_for_items(self):
-        link = self.driver.find_element("xpath",'//*[@id="js-main"]/div/div[1]/div[1]/div[3]/div[2]/article/div/h3/a')
-        self.article_links.append(link.get_attribute("href"))
+        # Find all the links with the class name 'tec--card__title__link'
+        link_elements = self.driver.find_elements(By.CLASS_NAME,'tec--card__title__link')
+
+        # Iterate over the link elements and extract the href attribute
+        for link_element in link_elements:
+            href = link_element.get_attribute('href')
+            self.article_links.append(href)
+            
         return self.article_links
 
     def get_text(self):
@@ -36,6 +44,7 @@ class TecMundo:
 
 def __main__():
     scraper = TecMundo()
+    #ipdb.set_trace()
     scraper.search_for_items() 
     print(scraper.article_links)
 
