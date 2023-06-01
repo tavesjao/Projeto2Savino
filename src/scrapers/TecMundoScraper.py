@@ -29,23 +29,32 @@ class TecMundo:
         for link_element in link_elements:
             href = link_element.get_attribute('href')
             self.article_links.append(href)
-            
+
         return self.article_links
 
-    def get_text(self):
-        pass
-        #grab all text from current page
-
+    def get_articles(self):
+        links = self.search_for_items()
+        for link in links:
+            self.driver.get(link)
+            #grab all text from current page
+            ipdb.set_trace()
+            self.articles["text"] = self.driver.find_element(By.CLASS_NAME, 'tec--article__body-grid').text
+            self.articles["title"] = self.driver.find_element(By.CLASS_NAME, 'tec--article__header__title').text
+            #self.articles["author"] = self.driver.find_element(By.CLASS_NAME, 'tec--link--tecmundo').text
+            self.articles["date"] = self.driver.find_element(By.CLASS_NAME, 'tec--timestamp__item').text
+    
+        return self.articles
 
     def translateArticle(self, article):
         #import googletranslate API
         pass
+        
 
 
 def __main__():
     scraper = TecMundo()
     #ipdb.set_trace()
-    scraper.search_for_items() 
+    scraper.get_articles() 
     print(scraper.article_links)
 
 if __name__ == "__main__":
