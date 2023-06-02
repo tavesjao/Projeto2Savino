@@ -51,12 +51,3 @@ class TecMundo:
         search_bar = self.driver.find_element(By.NAME, 'q')
         search_bar.send_keys(keyword)
         search_bar.send_keys(Keys.RETURN)
-
-def __main__():
-    scraper = TecMundo()
-    #ipdb.set_trace()
-    scraper.get_articles('airpods')
-    print(scraper.articles['author'])
-
-if __name__ == "__main__":
-    __main__()
