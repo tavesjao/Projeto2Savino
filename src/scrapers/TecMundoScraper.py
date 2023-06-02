@@ -51,3 +51,5 @@ class TecMundo:
         search_bar = self.driver.find_element(By.NAME, 'q')
         search_bar.send_keys(keyword)
         search_bar.send_keys(Keys.RETURN)
+
+# Path: src/scrapers/TechTudoscrapers.py
