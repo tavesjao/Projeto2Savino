@@ -4,12 +4,11 @@ from selenium.webdriver.common.by import By
 
 class TudoCelular:
     def __init__(self):
-        self.path = "C:\Program Files (x86)\chromedriver.exe"
         self.base_url = "https://www.tudocelular.com/"
         self.name = "TudoCelular"
         self.article_links = []
         self.articles = []
-        self.driver = webdriver.Chrome(self.path)
+        self.driver = webdriver.Chrome()
         self.driver.get(self.base_url)
 
         # define the data we want and the structure to store it
