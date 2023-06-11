@@ -1,7 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-
+import os
+import json
 
 class TudoCelular:
     def __init__(self):
@@ -34,9 +35,13 @@ class TudoCelular:
                 "title": self.driver.find_element(By.XPATH, '//*[@id="hero"]/h2').text,
                 "author": self.driver.find_element(By.CLASS_NAME, 's_author').text,
                 "date": self.driver.find_element(By.XPATH, '//*[@id="hero"]/p').text,
-                "text": self.driver.find_element(By.CLASS_NAME, 'textblock').text
+                "text": self.driver.find_element(By.CLASS_NAME, 'textblock').text,
+                "link": link
             }
             self.articles.append(article)
+        data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
+        with open(os.path.join(data_dir, 'TudoCelular.json'), 'w') as f:
+            json.dump(self.articles, f)
 
         return self.articles
 

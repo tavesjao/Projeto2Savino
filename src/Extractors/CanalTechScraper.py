@@ -2,6 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from urllib.parse import urlparse
+import os
+import json
 
 class CanalTech:
     def __init__(self):
@@ -37,9 +39,11 @@ class CanalTech:
                 "text": self.driver.find_element(By.XPATH, '//div[@class="c-dWLaHV"]').text,
                 "link": link,
             }
+            #save article to json file in data folder
             self.articles.append(article)
-
-        return self.articles
+        data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
+        with open(os.path.join(data_dir, 'CanalTech.json'), 'w') as f:
+            json.dump(self.articles, f)
 
     def target_search(self, keyword):
         # search for articles based on keywords

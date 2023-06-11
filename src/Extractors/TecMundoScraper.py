@@ -3,15 +3,17 @@ import selenium
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-import ipdb
+import json
+import os
 
 class TecMundo:
     def __init__(self):
+        self.path = "C:\Program Files (x86)\chromedriver.exe"
         self.base_url = "https://www.tecmundo.com.br/dispositivos-moveis"
         self.name = "TecMundo"
         self.article_links = []
         self.articles = []
-        self.driver = webdriver.Chrome()
+        self.driver = webdriver.Chrome(self.path)
         self.driver.get(self.base_url)
 
         #define the data we want and the structure to store it 
@@ -40,9 +42,13 @@ class TecMundo:
                 "title": self.driver.find_element(By.CLASS_NAME, 'tec--article__header__title').text,
                 #"author": self.driver.find_element(By.CSS_SELECTOR, '').text,
                 "date": self.driver.find_element(By.CLASS_NAME, 'tec--timestamp__item').text,
-                "text": self.driver.find_element(By.CLASS_NAME, 'tec--article__body-grid').text
+                "text": self.driver.find_element(By.CLASS_NAME, 'tec--article__body-grid').text,
+                "link": link
             }
             self.articles.append(article)
+        data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
+        with open(os.path.join(data_dir, 'TecMundo.json'), 'w') as f:
+            json.dump(self.articles, f)
     
         return self.articles
 
