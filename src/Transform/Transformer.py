@@ -34,6 +34,6 @@ class TextProcessor:
         return df_ct['text'].tolist()
     
     def save_clean_text(self, remove_date=False, remove_dupes=False):
-        with open(f'../data/{self.file_name}_clean.txt', 'w') as f:
+        with open(f'../clean_data/{self.file_name}_clean.txt', 'w') as f:
             for text in self.clean_text():
                 f.write(text + '\n')
