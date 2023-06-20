@@ -4,7 +4,7 @@ import nltk
 from nltk.corpus import stopwords
 nltk.download('stopwords')
 
-class TextProcessor:
+class Transformer:
     def __init__(self, file_name: str):
         self.file_name = file_name
         self.df = pd.read_json(f'../data/{self.file_name}.json')
