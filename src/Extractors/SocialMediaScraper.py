@@ -52,18 +52,18 @@ class SocialMedia:
 
         return self.text
 
-    def __login__(self):
+    def __login__(self, login_email, password):
         # login to the website
         #wait for page to load
         self.driver.implicitly_wait(10)
         login_button = self.driver.find_element(By.XPATH, '//div[@class="signup-email"]')
         login_button.click()
         input = self.driver.find_element(By.ID, 'login')
-        input.send_keys('makakitodocaraio@gmail.com')
+        input.send_keys(login_email)
         password = self.driver.find_element(By.XPATH, '//div[@class="signup-password"]')
         password.click()
         input_password = self.driver.find_element(By.ID, 'password')
-        input_password.send_keys('Isabola1010')
+        input_password.send_keys(password)
         login = self.driver.find_element(By.XPATH, '//input[@class="button-signup login_button"]')
         login.click()
 
