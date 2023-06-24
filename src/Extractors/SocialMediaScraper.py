@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 class SocialMedia:
-    def __init__(self):
+    def __init__(self, login_email, password):
         self.path = "C:\Program Files (x86)\chromedriver.exe"
         self.base_url = "https://app.brand24.com/panel/results/1072087150?p=1&or=2&cdt=days&dr=4&rt=1&va=1&d1=2023-05-22&d2=2023-06-21"
         self.name = "SocialMedia"
@@ -16,10 +16,13 @@ class SocialMedia:
         self.text = []
         self.driver = webdriver.Chrome(self.path)
         self.driver.get(self.base_url)
+        self.login_email = login_email
+        self.password = password
+        
 
     def search_for_items(self):
         #login
-        self.__login__()
+        self.__login__(self.login_email, self.password)
         #wait for page to load
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, '//div[@class="sc-ktLMLx gHpgkT"]')))
