@@ -24,7 +24,7 @@ class OlharDigital:
 
     def get_article_links(self):
         self.driver.get(self.base_url + 'editorias/reviews')
-        for page in range(1, 5):
+        for page in range(1, 30):
             link_elements = self.driver.find_elements(By.XPATH, '//a[@class="card-post type8 img-effect1"]')
             for link_element in link_elements:
                 href = link_element.get_attribute('href')
@@ -67,11 +67,3 @@ class OlharDigital:
             return True
         except (NoSuchElementException, StaleElementReferenceException) as e:
             return False
-
-def main():
-    olhar = OlharDigital()
-    olhar.get_articles(save=True)
-    olhar.driver.close()
-
-if __name__ == '__main__':
-    main()
