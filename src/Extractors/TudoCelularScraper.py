@@ -26,7 +26,7 @@ class TudoCelular:
 
         return self.article_links
 
-    def get_articles(self, keyword=None):
+    def get_articles(self, keyword=None, save=False):
         links = self.search_for_items(keyword)
         print(len(links))
         for link in links:
@@ -39,9 +39,11 @@ class TudoCelular:
                 "link": link
             }
             self.articles.append(article)
-        data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
-        with open(os.path.join(data_dir, 'TudoCelular.json'), 'w') as f:
-            json.dump(self.articles, f)
+
+        if save:
+            data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
+            with open(os.path.join(data_dir, 'TudoCelular.json'), 'w') as f:
+                json.dump(self.articles, f)
 
         return self.articles
 

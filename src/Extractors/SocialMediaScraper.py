@@ -22,7 +22,7 @@ class SocialMedia:
 
     def search_for_items(self):
         #login
-        self.__login__(self.login_email, self.password)
+        self.__login__()
         #wait for page to load
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.XPATH, '//div[@class="sc-ktLMLx gHpgkT"]')))
@@ -55,26 +55,17 @@ class SocialMedia:
 
         return self.text
 
-    def __login__(self, login_email, password):
+    def __login__(self):
         # login to the website
         #wait for page to load
         self.driver.implicitly_wait(10)
         login_button = self.driver.find_element(By.XPATH, '//div[@class="signup-email"]')
         login_button.click()
         input = self.driver.find_element(By.ID, 'login')
-        input.send_keys(login_email)
+        input.send_keys(self.login_email)
         password = self.driver.find_element(By.XPATH, '//div[@class="signup-password"]')
         password.click()
         input_password = self.driver.find_element(By.ID, 'password')
-        input_password.send_keys(password)
+        input_password.send_keys(self.password)
         login = self.driver.find_element(By.XPATH, '//input[@class="button-signup login_button"]')
         login.click()
-
-def main():
-    scraper = SocialMedia()
-    items = scraper.get_tweets(save=True)
-    print(len(items))
-    print(items)
-
-if __name__ == "__main__":
-    main()

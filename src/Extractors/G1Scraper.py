@@ -21,7 +21,7 @@ class G1:
 
         #define the data we want and the structure to store it
 
-    def search_for_items(self, keyword=None):
+    def search_for_items(self, keyword=None, save=False)):
         if keyword:
             self.target_search(keyword)
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//li[@class="widget widget--card widget--info"]//a')))
@@ -44,9 +44,10 @@ class G1:
                 "link": link
             }
             self.articles.append(article)
-        data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
-        with open(os.path.join(data_dir, 'G1.json'), 'w') as f:
-            json.dump(self.articles, f)
+        if save:
+            data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
+            with open(os.path.join(data_dir, 'G1.json'), 'w') as f:
+                json.dump(self.articles, f)
 
         return self.articles
 

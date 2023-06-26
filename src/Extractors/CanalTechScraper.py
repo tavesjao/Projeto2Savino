@@ -27,7 +27,7 @@ class CanalTech:
                 self.article_links.append(link_element.get_attribute("href"))
         return self.article_links
 
-    def get_articles(self, keyword=None):
+    def get_articles(self, keyword=None, save=False):
         links = self.search_for_items(keyword)
         print(len(links))
         for link in links:
@@ -41,9 +41,10 @@ class CanalTech:
             }
             #save article to json file in data folder
             self.articles.append(article)
-        data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
-        with open(os.path.join(data_dir, 'CanalTech.json'), 'w') as f:
-            json.dump(self.articles, f)
+        if save:
+            data_dir = os.path.join(os.path.dirname(__file__), '..', 'data')
+            with open(os.path.join(data_dir, 'CanalTech.json'), 'w') as f:
+                json.dump(self.articles, f)
 
     def target_search(self, keyword):
         # search for articles based on keywords
